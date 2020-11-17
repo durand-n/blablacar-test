@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+protocol SearchModuleFactory {
+    func makeSearchController(viewModel: SearchModuleViewModelType) -> SearchModuleView
+    func makeSearchResultsController(viewModel: SearchResultsViewModelType) -> SearchResultsView
+}

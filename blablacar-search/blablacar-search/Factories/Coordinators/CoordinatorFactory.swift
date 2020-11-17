@@ -10,4 +10,5 @@ import UIKit
 import CoreData
 
 protocol CoordinatorFactory {
+    func makeSearchCoordinator(router: Router) -> Coordinator
 }

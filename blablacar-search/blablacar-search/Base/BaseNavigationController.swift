@@ -22,8 +22,8 @@ class BaseNavigationController: UINavigationController {
         super.viewDidLoad()
         self.navigationBar.isTranslucent = false
         self.navigationBar.tintColor = .black
-        self.navigationBar.barTintColor = .black
-        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationBar.barTintColor = .white
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationBar.shadowImage = UIImage()
     }

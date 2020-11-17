@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,13 @@
 		145B8ABB2563F1530079A10A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 145B8ABA2563F1530079A10A /* Assets.xcassets */; };
 		145B8ABE2563F1530079A10A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145B8ABC2563F1530079A10A /* LaunchScreen.storyboard */; };
 		145B8AC92563F1530079A10A /* blablacar_searchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8AC82563F1530079A10A /* blablacar_searchTests.swift */; };
+		145B8AEF2563F3750079A10A /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8AEE2563F3750079A10A /* SearchCoordinator.swift */; };
+		145B8AF92563F4B60079A10A /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8AF82563F4B60079A10A /* SearchResultsController.swift */; };
+		145B8B012563F4EF0079A10A /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8B002563F4EF0079A10A /* SearchResultsViewModel.swift */; };
+		145B8B0F2563F7A20079A10A /* SearchModuleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8B0E2563F7A20079A10A /* SearchModuleController.swift */; };
+		145B8B142563F7DB0079A10A /* SearchModuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8B132563F7DB0079A10A /* SearchModuleViewModel.swift */; };
+		45133D48763EDBEC2ED0CA3A /* Pods_blablacar_search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 817ACE8602BAA1524C0166D1 /* Pods_blablacar_search.framework */; };
+		48B50852BA9BC83FD20C30FE /* Pods_blablacar_searchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B5B0A5B815A58598649285 /* Pods_blablacar_searchTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00BA94FDA3796AE4E785D712 /* Pods-blablacar-search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blablacar-search.release.xcconfig"; path = "Target Support Files/Pods-blablacar-search/Pods-blablacar-search.release.xcconfig"; sourceTree = "<group>"; };
 		145B8A8A2563F1520079A10A /* blablacar-search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "blablacar-search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		145B8A8D2563F1520079A10A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		145B8A902563F1520079A10A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -74,6 +82,16 @@
 		145B8AC82563F1530079A10A /* blablacar_searchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blablacar_searchTests.swift; sourceTree = "<group>"; };
 		145B8ACA2563F1530079A10A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145B8ACF2563F1530079A10A /* blablacar-searchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "blablacar-searchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		145B8AEE2563F3750079A10A /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		145B8AF82563F4B60079A10A /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
+		145B8B002563F4EF0079A10A /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
+		145B8B0E2563F7A20079A10A /* SearchModuleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModuleController.swift; sourceTree = "<group>"; };
+		145B8B132563F7DB0079A10A /* SearchModuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModuleViewModel.swift; sourceTree = "<group>"; };
+		4A5F17E8C38E9D3864707ED9 /* Pods-blablacar-searchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blablacar-searchTests.release.xcconfig"; path = "Target Support Files/Pods-blablacar-searchTests/Pods-blablacar-searchTests.release.xcconfig"; sourceTree = "<group>"; };
+		817ACE8602BAA1524C0166D1 /* Pods_blablacar_search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_blablacar_search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9752F322934DEBA94699EBAA /* Pods-blablacar-search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blablacar-search.debug.xcconfig"; path = "Target Support Files/Pods-blablacar-search/Pods-blablacar-search.debug.xcconfig"; sourceTree = "<group>"; };
+		B074C831FCFFC5B2588A4BB9 /* Pods-blablacar-searchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blablacar-searchTests.debug.xcconfig"; path = "Target Support Files/Pods-blablacar-searchTests/Pods-blablacar-searchTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B8B5B0A5B815A58598649285 /* Pods_blablacar_searchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_blablacar_searchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45133D48763EDBEC2ED0CA3A /* Pods_blablacar_search.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48B50852BA9BC83FD20C30FE /* Pods_blablacar_searchTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +127,8 @@
 				145B8A8C2563F1520079A10A /* blablacar-search */,
 				145B8AC72563F1530079A10A /* blablacar-searchTests */,
 				145B8A8B2563F1520079A10A /* Products */,
+				F57D9EF1CBD2835F620FDB73 /* Pods */,
+				50939B046C800A9EA2D505A3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +160,7 @@
 		145B8A8F2563F1520079A10A /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				145B8AED2563F3560079A10A /* Search */,
 				145B8A902563F1520079A10A /* AppCoordinator.swift */,
 			);
 			path = Flows;
@@ -213,6 +236,54 @@
 			path = "blablacar-searchTests";
 			sourceTree = "<group>";
 		};
+		145B8AED2563F3560079A10A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				145B8AF72563F4830079A10A /* Search results */,
+				145B8AF62563F4520079A10A /* Search module */,
+				145B8AEE2563F3750079A10A /* SearchCoordinator.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		145B8AF62563F4520079A10A /* Search module */ = {
+			isa = PBXGroup;
+			children = (
+				145B8B0E2563F7A20079A10A /* SearchModuleController.swift */,
+				145B8B132563F7DB0079A10A /* SearchModuleViewModel.swift */,
+			);
+			path = "Search module";
+			sourceTree = "<group>";
+		};
+		145B8AF72563F4830079A10A /* Search results */ = {
+			isa = PBXGroup;
+			children = (
+				145B8AF82563F4B60079A10A /* SearchResultsController.swift */,
+				145B8B002563F4EF0079A10A /* SearchResultsViewModel.swift */,
+			);
+			path = "Search results";
+			sourceTree = "<group>";
+		};
+		50939B046C800A9EA2D505A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				817ACE8602BAA1524C0166D1 /* Pods_blablacar_search.framework */,
+				B8B5B0A5B815A58598649285 /* Pods_blablacar_searchTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F57D9EF1CBD2835F620FDB73 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9752F322934DEBA94699EBAA /* Pods-blablacar-search.debug.xcconfig */,
+				00BA94FDA3796AE4E785D712 /* Pods-blablacar-search.release.xcconfig */,
+				B074C831FCFFC5B2588A4BB9 /* Pods-blablacar-searchTests.debug.xcconfig */,
+				4A5F17E8C38E9D3864707ED9 /* Pods-blablacar-searchTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -220,9 +291,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 145B8AD82563F1530079A10A /* Build configuration list for PBXNativeTarget "blablacar-search" */;
 			buildPhases = (
+				F250EA635B919EE29F74904E /* [CP] Check Pods Manifest.lock */,
 				145B8A862563F1520079A10A /* Sources */,
 				145B8A872563F1520079A10A /* Frameworks */,
 				145B8A882563F1520079A10A /* Resources */,
+				4CCDD9C14EB1E5A6119AD8E0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -237,6 +310,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 145B8ADB2563F1530079A10A /* Build configuration list for PBXNativeTarget "blablacar-searchTests" */;
 			buildPhases = (
+				C777A9919A148AE4B22E7238 /* [CP] Check Pods Manifest.lock */,
 				145B8AC02563F1530079A10A /* Sources */,
 				145B8AC12563F1530079A10A /* Frameworks */,
 				145B8AC22563F1530079A10A /* Resources */,
@@ -337,6 +411,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4CCDD9C14EB1E5A6119AD8E0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-blablacar-search/Pods-blablacar-search-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-blablacar-search/Pods-blablacar-search-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-blablacar-search/Pods-blablacar-search-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C777A9919A148AE4B22E7238 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-blablacar-searchTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F250EA635B919EE29F74904E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-blablacar-search-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		145B8A862563F1520079A10A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -347,16 +485,21 @@
 				145B8AB72563F1520079A10A /* UIViewController.swift in Sources */,
 				145B8AAF2563F1520079A10A /* UIImageView.swift in Sources */,
 				145B8A9C2563F1520079A10A /* ModuleFactoryImp.swift in Sources */,
+				145B8B0F2563F7A20079A10A /* SearchModuleController.swift in Sources */,
 				145B8AA62563F1520079A10A /* RouterImp.swift in Sources */,
 				145B8A952563F1520079A10A /* CoordinatorFactory.swift in Sources */,
 				145B8AA42563F1520079A10A /* Router.swift in Sources */,
+				145B8AF92563F4B60079A10A /* SearchResultsController.swift in Sources */,
+				145B8AEF2563F3750079A10A /* SearchCoordinator.swift in Sources */,
 				145B8A9A2563F1520079A10A /* ModuleFactory.swift in Sources */,
+				145B8B012563F4EF0079A10A /* SearchResultsViewModel.swift in Sources */,
 				145B8A912563F1520079A10A /* AppCoordinator.swift in Sources */,
 				145B8AA92563F1520079A10A /* Date.swift in Sources */,
 				145B8AB12563F1520079A10A /* UILabel.swift in Sources */,
 				145B8AAD2563F1520079A10A /* UIColor.swift in Sources */,
 				145B8A9F2563F1520079A10A /* Base.swift in Sources */,
 				145B8AB52563F1520079A10A /* UIView.swift in Sources */,
+				145B8B142563F7DB0079A10A /* SearchModuleViewModel.swift in Sources */,
 				145B8AB32563F1520079A10A /* UITableView.swift in Sources */,
 				145B8A8E2563F1520079A10A /* AppDelegate.swift in Sources */,
 				145B8AAB2563F1520079A10A /* UIButton.swift in Sources */,
@@ -523,6 +666,7 @@
 		};
 		145B8AD92563F1530079A10A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9752F322934DEBA94699EBAA /* Pods-blablacar-search.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -543,6 +687,7 @@
 		};
 		145B8ADA2563F1530079A10A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00BA94FDA3796AE4E785D712 /* Pods-blablacar-search.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -563,6 +708,7 @@
 		};
 		145B8ADC2563F1530079A10A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B074C831FCFFC5B2588A4BB9 /* Pods-blablacar-searchTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -585,6 +731,7 @@
 		};
 		145B8ADD2563F1530079A10A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A5F17E8C38E9D3864707ED9 /* Pods-blablacar-searchTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

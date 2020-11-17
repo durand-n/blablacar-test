@@ -19,7 +19,9 @@ public class ApplicationCoordinator: BaseCoordinator {
     }
 
     override public func start() {
-       
+        let searchCoordinator = coordinatorFactory.makeSearchCoordinator(router: self.router)
+        addChild(searchCoordinator)
+        searchCoordinator.start()
     }
 
 }
