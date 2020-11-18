@@ -10,13 +10,13 @@ import Foundation
 
 final class ModuleFactoryImp {}
 
+
 extension ModuleFactoryImp: SearchModuleFactory {
-    func makeSearchController(viewModel: SearchModuleViewModelType) -> SearchModuleView {
-        return SearchModuleController(viewModel: viewModel)
+    func makeSearchController(viewModel: SearchFormViewModelType) -> SearchFormView {
+        return SearchFormController(viewModel: viewModel)
     }
     
     func makeSearchResultsController(viewModel: SearchResultsViewModelType) -> SearchResultsView {
         return SearchResultsController(viewModel: viewModel)
     }
-    
 }

@@ -9,6 +9,6 @@
 import Foundation
 
 protocol SearchModuleFactory {
-    func makeSearchController(viewModel: SearchModuleViewModelType) -> SearchModuleView
+    func makeSearchController(viewModel: SearchFormViewModelType) -> SearchFormView
     func makeSearchResultsController(viewModel: SearchResultsViewModelType) -> SearchResultsView
 }

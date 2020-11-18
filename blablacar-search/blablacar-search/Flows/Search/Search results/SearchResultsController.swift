@@ -25,10 +25,13 @@ class SearchResultsController: UIViewController, SearchResultsView {
     }
     
     override func viewDidLoad() {
+        view.backgroundColor = .sand
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.separatorColor = .clear
+        tableView.backgroundColor = .sand
+        tableView.registerCellClass(TripCell.self)
         
         view.addSubview(tableView)
         
@@ -40,6 +43,7 @@ class SearchResultsController: UIViewController, SearchResultsView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 // MARK: - Tableview delegates and datasource
@@ -50,6 +54,10 @@ extension SearchResultsController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withClass: TripCell.self)
+        if let content = viewModel.getContentFor(row: indexPath.row) {
+            cell.setContent(content)
+        }
+        return cell
     }
 }

@@ -21,16 +21,16 @@ class SearchCoordinator: BaseCoordinator {
     }
     
     func showSearchPage() {
-        let module = factory.makeSearchController(viewModel: SearchModuleViewModel())
-        module.onShowResults = { [weak self] in
-            guard let self = self else { return }
-            self.showResults()
-        }
+        let module = factory.makeSearchController(viewModel: SearchFormViewModel())
+        module.onShowResults = showResults(trips:)
         
         self.router.push(module)
     }
     
-    func showResults() {
-        
+
+    
+    func showResults(trips: [BlaBlaApiModel.TripSearchResults.Trip]) {
+        let module = factory.makeSearchResultsController(viewModel: SearchResultsViewModel(trips: trips))
+        self.router.push(module)
     }
 }
