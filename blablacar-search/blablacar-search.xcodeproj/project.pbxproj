@@ -29,7 +29,6 @@
 		145B8AB72563F1520079A10A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8AB62563F1520079A10A /* UIViewController.swift */; };
 		145B8ABB2563F1530079A10A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 145B8ABA2563F1530079A10A /* Assets.xcassets */; };
 		145B8ABE2563F1530079A10A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145B8ABC2563F1530079A10A /* LaunchScreen.storyboard */; };
-		145B8AC92563F1530079A10A /* blablacar_searchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8AC82563F1530079A10A /* blablacar_searchTests.swift */; };
 		145B8AEF2563F3750079A10A /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8AEE2563F3750079A10A /* SearchCoordinator.swift */; };
 		145B8AF92563F4B60079A10A /* SearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8AF82563F4B60079A10A /* SearchResultsController.swift */; };
 		145B8B012563F4EF0079A10A /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B8B002563F4EF0079A10A /* SearchResultsViewModel.swift */; };
@@ -42,7 +41,6 @@
 		14F27893256713FE0056128C /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F27892256713FE0056128C /* LocationSearchController.swift */; };
 		14F278AB256738BA0056128C /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F278AA256738BA0056128C /* LocationSearchViewModel.swift */; };
 		45133D48763EDBEC2ED0CA3A /* Pods_blablacar_search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 817ACE8602BAA1524C0166D1 /* Pods_blablacar_search.framework */; };
-		48B50852BA9BC83FD20C30FE /* Pods_blablacar_searchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B5B0A5B815A58598649285 /* Pods_blablacar_searchTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,8 +87,6 @@
 		145B8ABD2563F1530079A10A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		145B8ABF2563F1530079A10A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145B8AC42563F1530079A10A /* blablacar-searchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "blablacar-searchTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		145B8AC82563F1530079A10A /* blablacar_searchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blablacar_searchTests.swift; sourceTree = "<group>"; };
-		145B8ACA2563F1530079A10A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145B8ACF2563F1530079A10A /* blablacar-searchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "blablacar-searchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		145B8AEE2563F3750079A10A /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		145B8AF82563F4B60079A10A /* SearchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsController.swift; sourceTree = "<group>"; };
@@ -103,11 +99,8 @@
 		14A999012564831F0048A121 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		14F27892256713FE0056128C /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 		14F278AA256738BA0056128C /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
-		4A5F17E8C38E9D3864707ED9 /* Pods-blablacar-searchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blablacar-searchTests.release.xcconfig"; path = "Target Support Files/Pods-blablacar-searchTests/Pods-blablacar-searchTests.release.xcconfig"; sourceTree = "<group>"; };
 		817ACE8602BAA1524C0166D1 /* Pods_blablacar_search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_blablacar_search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9752F322934DEBA94699EBAA /* Pods-blablacar-search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blablacar-search.debug.xcconfig"; path = "Target Support Files/Pods-blablacar-search/Pods-blablacar-search.debug.xcconfig"; sourceTree = "<group>"; };
-		B074C831FCFFC5B2588A4BB9 /* Pods-blablacar-searchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blablacar-searchTests.debug.xcconfig"; path = "Target Support Files/Pods-blablacar-searchTests/Pods-blablacar-searchTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B8B5B0A5B815A58598649285 /* Pods_blablacar_searchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_blablacar_searchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B50852BA9BC83FD20C30FE /* Pods_blablacar_searchTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				145B8A8C2563F1520079A10A /* blablacar-search */,
-				145B8AC72563F1530079A10A /* blablacar-searchTests */,
 				145B8A8B2563F1520079A10A /* Products */,
 				F57D9EF1CBD2835F620FDB73 /* Pods */,
 				50939B046C800A9EA2D505A3 /* Frameworks */,
@@ -256,15 +247,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		145B8AC72563F1530079A10A /* blablacar-searchTests */ = {
-			isa = PBXGroup;
-			children = (
-				145B8AC82563F1530079A10A /* blablacar_searchTests.swift */,
-				145B8ACA2563F1530079A10A /* Info.plist */,
-			);
-			path = "blablacar-searchTests";
-			sourceTree = "<group>";
-		};
 		145B8AED2563F3560079A10A /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				817ACE8602BAA1524C0166D1 /* Pods_blablacar_search.framework */,
-				B8B5B0A5B815A58598649285 /* Pods_blablacar_searchTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -318,8 +299,6 @@
 			children = (
 				9752F322934DEBA94699EBAA /* Pods-blablacar-search.debug.xcconfig */,
 				00BA94FDA3796AE4E785D712 /* Pods-blablacar-search.release.xcconfig */,
-				B074C831FCFFC5B2588A4BB9 /* Pods-blablacar-searchTests.debug.xcconfig */,
-				4A5F17E8C38E9D3864707ED9 /* Pods-blablacar-searchTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -350,7 +329,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 145B8ADB2563F1530079A10A /* Build configuration list for PBXNativeTarget "blablacar-searchTests" */;
 			buildPhases = (
-				C777A9919A148AE4B22E7238 /* [CP] Check Pods Manifest.lock */,
 				145B8AC02563F1530079A10A /* Sources */,
 				145B8AC12563F1530079A10A /* Frameworks */,
 				145B8AC22563F1530079A10A /* Resources */,
@@ -469,28 +447,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-blablacar-search/Pods-blablacar-search-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C777A9919A148AE4B22E7238 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-blablacar-searchTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F250EA635B919EE29F74904E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -558,7 +514,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145B8AC92563F1530079A10A /* blablacar_searchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,14 +674,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5UUJSPE7Z5;
+				DEVELOPMENT_TEAM = GJG75689M4;
 				INFOPLIST_FILE = "blablacar-search/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.cleanfox.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "durand-n.blablacar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -740,14 +695,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5UUJSPE7Z5;
+				DEVELOPMENT_TEAM = GJG75689M4;
 				INFOPLIST_FILE = "blablacar-search/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.cleanfox.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "durand-n.blablacar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -756,7 +711,6 @@
 		};
 		145B8ADC2563F1530079A10A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B074C831FCFFC5B2588A4BB9 /* Pods-blablacar-searchTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -779,7 +733,6 @@
 		};
 		145B8ADD2563F1530079A10A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A5F17E8C38E9D3864707ED9 /* Pods-blablacar-searchTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

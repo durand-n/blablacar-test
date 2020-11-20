@@ -10,10 +10,4 @@ target 'blablacar-search' do
   pod 'Alamofire', '~> 5.2'
   pod 'KeychainAccess'
 
-  target 'blablacar-searchTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-
 end
