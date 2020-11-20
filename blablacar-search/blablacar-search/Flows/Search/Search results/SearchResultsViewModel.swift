@@ -72,11 +72,24 @@ class SearchResultsViewModel: SearchResultsViewModelType {
                     self.cursor = result.pagination.nextCursor
                     self.onInsert?(result.trips.count)
                 } else {
-                    self.onShowError?(error?.message ?? "Une erreur est survenue")
+                    if error?.code == 401 {
+                        self.refreshToken()
+                        self.onShowError?("Merci de réessayer")
+                    } else {
+                        self.onShowError?(error?.message ?? "Une erreur est survenue")
+                    }
                 }
             }
         } else {
             self.onDone?()
+        }
+    }
+    
+    func refreshToken() {
+        Services.shared.blablaApi.getToken { (token, error) in
+            if let token = token {
+                keychain.setToken(token: token)
+            }
         }
     }
 }
