@@ -9,16 +9,21 @@ import UIKit
 
 protocol SearchFormView: BaseView {
     var onShowResults: ((_ trips: [BlaBlaApiModel.TripSearchResults.Trip]) -> Void)? { get set }
+    var onSelectStartWith: ((_ address: String?) -> Void)? { get set }
+    var onSelectDesinationWith: ((_ address: String?) -> Void)? { get set }
 }
 
 class SearchFormController: UIViewController, SearchFormView {
     // MARK: - Protocol compliance
     var onShowResults: (([BlaBlaApiModel.TripSearchResults.Trip]) -> Void)?
+    var onSelectStartWith: ((String?) -> Void)?
+    var onSelectDesinationWith: ((String?) -> Void)?
     
     // MARK: - Properties
     
     private var viewModel: SearchFormViewModelType
-    
+    private let destinationField = UITextField(backgroundColor: .white)
+    private let departureField = UITextField(backgroundColor: .white)
     // MARK: - Lifecycle
     
     init(viewModel: SearchFormViewModelType) {
@@ -28,8 +33,11 @@ class SearchFormController: UIViewController, SearchFormView {
         self.viewModel.onGetAccessToken = {
             Loader.hide()
         }
-        Loader.show()
-        self.viewModel.refreshToken()
+        
+        self.viewModel.onFieldsUpdate = { [weak self] in
+            self?.departureField.text = viewModel.startAddress
+            self?.destinationField.text = viewModel.destinationAddress
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -38,8 +46,9 @@ class SearchFormController: UIViewController, SearchFormView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         designView()
+        Loader.show()
+        self.viewModel.refreshToken()
     }
     
     // MARK: - Design
@@ -48,16 +57,20 @@ class SearchFormController: UIViewController, SearchFormView {
         view.backgroundColor = .white
         let cardContainer = UIView(backgroundColor: .primary)
         let departureLabel = UILabel(title: "Départ", type: .medium, color: .black, size: 14, lines: 1, alignment: .left)
-        let departureField = UITextField(backgroundColor: .white)
         let destinationLabel = UILabel(title: "Arrivée", type: .medium, color: .black, size: 14, lines: 1, alignment: .left)
-        let destinationField = UITextField(backgroundColor: .white)
         let searchButton = UIButton(title: "Rechercher", font: .bold, fontSize: 16, textColor: .white, backgroundColor: .secondary)
         
         departureField.cornerRadius = 8
         departureField.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
+        departureField.tag = 0
+        departureField.delegate = self
         destinationField.cornerRadius = 8
         destinationField.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
+        destinationField.tag = 1
+        destinationField.delegate = self
         searchButton.addTarget(self, action: #selector(searchPushed), for: .touchUpInside)
+        departureField.text = viewModel.startAddress
+        destinationField.text = viewModel.destinationAddress
         
         // MARK: - View constraints
         
@@ -125,5 +138,14 @@ class SearchFormController: UIViewController, SearchFormView {
             alert.addAction(canRetry ? retry : close)
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+}
+
+extension SearchFormController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print(textField.tag)
+        textField.resignFirstResponder()
+        textField.tag == 0 ? self.onSelectStartWith?(textField.text) : self.onSelectDesinationWith?(textField.text)
     }
 }
