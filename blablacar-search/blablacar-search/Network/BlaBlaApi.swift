@@ -10,34 +10,46 @@ import Alamofire
 import MapKit
 
 enum BlaBlaApiRoutes {
-    case token
-    case trip(from: String, to: String, uuid: String)
-    case tripWithCoordinates(from: String, to: String, uuid: String)
+    case Token
+    case Trip(from: String, to: String, uuid: String, type: TripSearchType)
 }
 
 extension BlaBlaApiRoutes {
     var path: String {
         switch self {
-        case .token:
+        case .Token:
             return "\(Constants.SERVER_URL)/token"
-        case .trip(from: let from, to: let to, uuid: let uuid):
-            return "\(Constants.SERVER_URL)/trip/search?from_address=\(from)&to_address=\(to)&search_uuid=\(uuid)"
-        case .tripWithCoordinates(from: let from, to: let to, uuid: let uuid):
-            return "\(Constants.SERVER_URL)/trip/search?from_coordinates=\(from)&to_coordinates=\(to)&search_uuid=\(uuid)"
+        case .Trip(from: let from, to: let to, uuid: let uuid, type: let type):
+            var requestUrl = ""
+            switch type {
+            case .Coordinates:
+                requestUrl = "\(Constants.SERVER_URL)/trip/search?from_coordinates=\(from)&to_coordinates=\(to)&search_uuid=\(uuid)&from_country=\(Constants.COUNTRY_CODE)&to_country=\(Constants.COUNTRY_CODE)"
+            case .Address:
+                requestUrl = "\(Constants.SERVER_URL)/trip/search?from_address=\(from)&to_address=\(to)&search_uuid=\(uuid)"
+            }
+            if let encoded = requestUrl.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) {
+                return encoded
+            } else {
+                return requestUrl
+            }
         }
     }
 }
 
+enum TripSearchType {
+    case Coordinates
+    case Address
+}
+
 protocol BlaBlaApi {
-    func getToken(completion: @escaping (_ token: String? , _ error: Error?) -> Void)
-    func getTrips(from adress: String, to adress: String, completion: @escaping (_ result: [BlaBlaApiModel.TripSearchResults.Trip]? , _ error: Error?) -> Void)
-    func getTrips(from coordinates: CLLocationCoordinate2D, to coordinates: CLLocationCoordinate2D, completion: @escaping (_ result: [BlaBlaApiModel.TripSearchResults.Trip]? , _ error: Error?) -> Void)
+    func getToken(completion: @escaping (_ token: String? , _ error: ApiError?) -> Void)
+    func getTrips(from adress: String, to adress: String, type: TripSearchType, cursor: String?, completion: @escaping (_ result: BlaBlaApiModel.TripSearchResults? , _ error: ApiError?) -> Void)
 }
 
 
 class BlaBlaApiImp: BlaBlaApi {
 
-    func getToken(completion: @escaping (String?, Error?) -> Void) {
+    func getToken(completion: @escaping (String?, ApiError?) -> Void) {
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         let parameters: Parameters = ["grant_type": "client_credentials",
                                       "client_id": Constants.CLIENT_ID,
@@ -48,68 +60,45 @@ class BlaBlaApiImp: BlaBlaApi {
                                           "SCOPE_INTERNAL_CLIENT"
                                       ]
                                     ]
-        AF.request(BlaBlaApiRoutes.token.path, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString(encoding: String.Encoding.utf8) { response in
+        AF.request(BlaBlaApiRoutes.Token.path, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseString(encoding: String.Encoding.utf8) { response in
             switch response.result {
             case let .success(value):
                 do {
                     let decoder = JSONDecoder()
                     let getTokenResult = try decoder.decode(BlaBlaApiModel.GetTokenResult.self, from: value.data(using: .utf8)!)
                     completion(getTokenResult.accessToken, nil)
-                } catch let jsonError {
-                    completion(nil, jsonError)
+                } catch  {
+                    let error = try? JSONDecoder().decode(BlaBlaApiModel.APIErrorResult.self, from: value.data(using: .utf8)!)
+                    completion(nil, ApiError(type: error?.type, message: error?.message))
                 }
             case let .failure(error):
-                completion(nil, error)
+                completion(nil, ApiError(code: error.responseCode))
             }
         }
     }
     
-    func getTrips(from: String, to: String, completion: @escaping ([BlaBlaApiModel.TripSearchResults.Trip]?, Error?) -> Void) {
+    func getTrips(from: String, to: String, type: TripSearchType, cursor: String? = nil, completion: @escaping (BlaBlaApiModel.TripSearchResults?, ApiError?) -> Void) {
         let headers: HTTPHeaders = ["Content-Type": "application/json",
                                     "X-Locale": "fr_FR",
                                     "X-Visitor-Id": UIDevice.current.identifierForVendor!.uuidString,
                                     "Authorization": "Bearer \(keychain.token())",
-                                    "X-Currency": "EUR",
+                                    "X-Currency": Constants.CURRENCY,
                                     "X-Client" : "iOS|1.0.0"
                                     ]
-        AF.request(BlaBlaApiRoutes.trip(from: from, to: to, uuid: UIDevice.current.identifierForVendor!.uuidString).path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseString(encoding: String.Encoding.utf8) { response in
+        AF.request(BlaBlaApiRoutes.Trip(from: from, to: to, uuid: UIDevice.current.identifierForVendor!.uuidString, type: type).path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseString(encoding: String.Encoding.utf8) { response in
             switch response.result {
             case let .success(value):
                 do {
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .iso8601
                     let results = try decoder.decode(BlaBlaApiModel.TripSearchResults.self, from: value.data(using: .utf8)!)
-                    completion(results.trips, nil)
-                } catch let jsonError {
-                    completion(nil, jsonError)
+                    completion(results, nil)
+                } catch {
+                    let error = try? JSONDecoder().decode(BlaBlaApiModel.APIErrorResult.self, from: value.data(using: .utf8)!)
+                    completion(nil, ApiError(type: error?.type, message: error?.message))
                 }
             case let .failure(error):
-                completion(nil, error)
-            }
-        }
-    }
-    
-    func getTrips(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([BlaBlaApiModel.TripSearchResults.Trip]?, Error?) -> Void) {
-        let headers: HTTPHeaders = ["Content-Type": "application/json",
-                                    "X-Locale": "fr_FR",
-                                    "X-Visitor-Id": UIDevice.current.identifierForVendor!.uuidString,
-                                    "Authorization": "Bearer \(keychain.token())",
-                                    "X-Currency": "EUR",
-                                    "X-Client" : "iOS|1.0.0"
-                                    ]
-        AF.request(BlaBlaApiRoutes.tripWithCoordinates(from: "\(from.latitude),\(from.longitude)", to: "\(to.latitude),\(to.longitude)", uuid: UIDevice.current.identifierForVendor!.uuidString).path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseString(encoding: String.Encoding.utf8) { response in
-            switch response.result {
-            case let .success(value):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .iso8601
-                    let results = try decoder.decode(BlaBlaApiModel.TripSearchResults.self, from: value.data(using: .utf8)!)
-                    completion(results.trips, nil)
-                } catch let jsonError {
-                    completion(nil, jsonError)
-                }
-            case let .failure(error):
-                completion(nil, error)
+                completion(nil, ApiError(code: error.responseCode))
             }
         }
     }

@@ -15,11 +15,13 @@ struct Constants {
     static let SERVER_URL = "https://edge.blablacar.com"
     static let CLIENT_SECRET = "rVSUYoebg6zbZxYNxGOGAxv09oSi3gGg"
     static let CLIENT_ID = "ios-technical-tests"
+    static let COUNTRY_CODE = "FR"
+    static let CURRENCY = "EUR"
 }
 
 struct Loader {
     static let contentView = UIView(backgroundColor: UIColor.black.withAlphaComponent(0.5))
-    static let spinner = UIActivityIndicatorView(style: .whiteLarge)
+    static let spinner = UIActivityIndicatorView(style: .large)
     
     static func show() {
         DispatchQueue.main.async {

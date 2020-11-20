@@ -20,9 +20,16 @@ class BlaBlaApiModel {
         }
     }
     
+    struct APIErrorResult: Codable {
+        let exception: String
+        let message: String
+        let type: String
+    }
+    
     struct TripSearchResults: Codable {
         
         let trips: [Trip]
+        let pagination: Pagination
         
         
         // MARK: - Trip
@@ -37,6 +44,14 @@ class BlaBlaApiModel {
                 case waypoints
                 case monetizationPrice = "monetization_price"
                 case driver
+            }
+        }
+        
+        struct Pagination: Codable {
+            let nextCursor: String?
+            
+            enum CodingKeys: String, CodingKey {
+                case nextCursor = "next_cursor"
             }
         }
 

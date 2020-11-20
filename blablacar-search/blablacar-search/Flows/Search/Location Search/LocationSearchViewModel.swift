@@ -37,7 +37,7 @@ class LocationSearchViewModel: NSObject, LocationSearchViewModelType {
         self.updateResults(query: fieldInit)
     }
     
-    // MARK: - Controller methods
+    // MARK: - Controller methods/properties
     var fieldInit: String
     
     func updateResults(query: String) {

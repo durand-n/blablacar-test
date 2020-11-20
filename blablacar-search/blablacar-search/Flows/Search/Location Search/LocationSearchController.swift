@@ -22,6 +22,7 @@ class LocationSearchController: UIViewController, LocationSearchView {
     private var searchController = UISearchController(searchResultsController: nil)
     private var searchBar: UISearchBar
     private var tableView = UITableView(backgroundColor: .white)
+    private var emptyLabel = UILabel(title: "Aucun résultat", type: .semiBold, color: .gray, size: 16, lines: 1, alignment: .center)
     private var viewModel: LocationSearchViewModelType
     
     // MARK: - Lifecycle
@@ -41,6 +42,7 @@ class LocationSearchController: UIViewController, LocationSearchView {
         viewModel.didFinishWith = self.didFinishWith
         viewModel.shouldReloadData = tableView.reloadData
         view.backgroundColor = .white
+        emptyLabel.backgroundColor = .white
         searchBar.sizeToFit()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -48,9 +50,13 @@ class LocationSearchController: UIViewController, LocationSearchView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerCellClass(LocationSearchCell.self)
-        view.addSubviews([tableView])
+        view.addSubviews([tableView, emptyLabel])
         
         tableView.snp.makeConstraints { cm in
+            cm.edges.equalToSuperview()
+        }
+        
+        emptyLabel.snp.makeConstraints { cm in
             cm.edges.equalToSuperview()
         }
         viewModel.updateResults(query: searchBar.text ?? "")
@@ -67,7 +73,13 @@ extension LocationSearchController: UISearchResultsUpdating {
 
 extension LocationSearchController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.itemCount
+        let rowCount = viewModel.itemCount
+        if rowCount == 0 {
+            emptyLabel.fadeIn()
+        } else {
+            emptyLabel.fadeOut()
+        }
+        return rowCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

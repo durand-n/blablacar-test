@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import MapKit
 
 protocol SearchFormView: BaseView {
-    var onShowResults: ((_ trips: [BlaBlaApiModel.TripSearchResults.Trip]) -> Void)? { get set }
+    var onShowResults: ((BlaBlaApiModel.TripSearchResults, (String, String, TripSearchType)) -> Void)? { get set }
     var onSelectStartWith: ((_ address: String?) -> Void)? { get set }
     var onSelectDesinationWith: ((_ address: String?) -> Void)? { get set }
 }
 
 class SearchFormController: UIViewController, SearchFormView {
+    
     // MARK: - Protocol compliance
-    var onShowResults: (([BlaBlaApiModel.TripSearchResults.Trip]) -> Void)?
+    var onShowResults: ((BlaBlaApiModel.TripSearchResults, (String, String, TripSearchType)) -> Void)?
     var onSelectStartWith: ((String?) -> Void)?
     var onSelectDesinationWith: ((String?) -> Void)?
     
@@ -116,10 +118,10 @@ class SearchFormController: UIViewController, SearchFormView {
     
     @objc func searchPushed() {
         Loader.show()
-        viewModel.getTrips { (trips, error) in
+        viewModel.getTrips { (data, request, error) in
             Loader.hide()
-            if let trips = trips {
-                self.onShowResults?(trips)
+            if let data = data {
+                self.onShowResults?(data, request)
             } else {
                 self.showError(message: error ?? "Une erreur est survenue")
             }

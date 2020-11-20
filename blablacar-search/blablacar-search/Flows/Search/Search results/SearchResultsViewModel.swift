@@ -6,25 +6,40 @@
 //
 
 import UIKit
+import MapKit
 
 typealias Trip = BlaBlaApiModel.TripSearchResults.Trip
 
 // MARK: - Protocol definition
 protocol SearchResultsViewModelType {
+    var onInsert: ((Int) -> Void)? { get set }
+    var onDone: (() -> Void)? { get set }
+    var onShowError: ((String) -> Void)? { get set }
     var resultsCount: Int { get }
     
     func getContentFor(row: Int) -> TripCellDataRepresentable?
+    func fetchNextTrips()
 }
 
-// MARK: - Protocol implementation
 class SearchResultsViewModel: SearchResultsViewModelType {
+    // MARK: - Protocol compliance
+    var onShowError: ((String) -> Void)?
+    var onInsert: ((Int) -> Void)?
+    var onDone: (() -> Void)?
     
+    // MARK: - Private properties
     private var trips: [Trip]
+    private var cursor: String?
+    private let request: (from: String, to: String, type: TripSearchType)
     
-    init(trips: [Trip]) {
-        self.trips = trips
+    // MARK: - Init
+    init(data: BlaBlaApiModel.TripSearchResults, request: (String, String, TripSearchType)) {
+        self.trips = data.trips
+        self.cursor = data.pagination.nextCursor
+        self.request = request
     }
     
+    // MARK: - Controller related methods/properties
     var resultsCount: Int {
         return trips.count
     }
@@ -34,7 +49,7 @@ class SearchResultsViewModel: SearchResultsViewModelType {
         let trip = trips [row]
         guard let start = trip.waypoints.first, let end = trip.waypoints.last else { return nil }
         
-        let representable = TripCellDataRepresentable(start: getWaypointAttributed(waypoint: start), destination: getWaypointAttributed(waypoint: end), driver: trip.driver.name, driverPicture: URL(string: trip.driver.thumbnail))
+        let representable = TripCellDataRepresentable(startDate: start.dateTime.string(withFormat: "EE dd MMM"), start: getWaypointAttributed(waypoint: start), destination: getWaypointAttributed(waypoint: end), driver: trip.driver.name, driverPicture: URL(string: trip.driver.thumbnail), price: trip.monetizationPrice.monetizedPrice.formattedPrice)
         return representable
     }
     
@@ -48,11 +63,30 @@ class SearchResultsViewModel: SearchResultsViewModelType {
         
         return attributed
     }
+    
+    func fetchNextTrips() {
+        if let cursor = cursor {
+            Services.shared.blablaApi.getTrips(from: request.from, to: request.to, type: request.type, cursor: cursor) { (result, error) in
+                if let result = result {
+                    self.trips.append(contentsOf: result.trips)
+                    self.cursor = result.pagination.nextCursor
+                    self.onInsert?(result.trips.count)
+                } else {
+                    self.onShowError?(error?.message ?? "Une erreur est survenue")
+                }
+            }
+        } else {
+            self.onDone?()
+        }
+    }
 }
 
+//MARK: - TripCellDataRepresentable
 struct TripCellDataRepresentable {
+    var startDate: String
     var start: NSAttributedString
     var destination: NSAttributedString
     var driver: String
     var driverPicture: URL?
+    var price: String
 }

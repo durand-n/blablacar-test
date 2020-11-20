@@ -11,18 +11,21 @@ import UIKit
 class TripCell: UITableViewCell {
     private var userPicture = UIImageView(image: nil, contentMode: .scaleToFill)
     private var userName = UILabel(title: "", type: .medium, color: .secondary, size: 14, lines: 1, alignment: .left)
+    private var departureDate = UILabel(title: "", type: .regular, color: .gray, size: 13, lines: 1, alignment: .left)
     private var departureLocation = UILabel(title: "", type: .regular, color: .gray, size: 13, lines: 1, alignment: .left)
     private var destinationLocation = UILabel(title: "", type: .regular, color: .gray, size: 13, lines: 1, alignment: .left)
+    private var priceLabel = UILabel(title: "", type: .bold, color: .secondary, size: 15, lines: 1, alignment: .right)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
         contentView.backgroundColor = .clear
+        selectionStyle = .none
         let container = UIView(backgroundColor: .white)
         let arrow = UIImageView(image: UIImage(systemName: "arrow.down") ?? UIImage(), contentMode: .scaleAspectFit)
         
         contentView.addSubview(container)
-        container.addSubviews([userPicture, userName, departureLocation, arrow, destinationLocation])
+        container.addSubviews([userPicture, priceLabel, userName, departureDate, departureLocation, arrow, destinationLocation])
         
         container.snp.makeConstraints { cm in
             cm.top.bottom.equalToSuperview().inset(8)
@@ -45,10 +48,21 @@ class TripCell: UITableViewCell {
                 cm.top.equalToSuperview().offset(20)
             }
             
-            departureLocation.snp.makeConstraints { cm in
+            priceLabel.snp.makeConstraints { cm in
+                cm.top.equalToSuperview().offset(20)
+                cm.right.equalToSuperview().offset(-16)
+            }
+            
+            departureDate.snp.makeConstraints { cm in
                 cm.left.equalTo(userName)
                 cm.right.equalToSuperview()
                 cm.top.equalTo(userName.snp.bottom).offset(4)
+            }
+            
+            departureLocation.snp.makeConstraints { cm in
+                cm.left.equalTo(userName)
+                cm.right.equalToSuperview()
+                cm.top.equalTo(departureDate.snp.bottom).offset(4)
             }
             
             arrow.snp.makeConstraints { cm in
@@ -73,7 +87,9 @@ class TripCell: UITableViewCell {
         if let url = content.driverPicture {
             userPicture.load(url: url)
         }
+        departureDate.text = content.startDate
         userName.text = content.driver
+        priceLabel.text = content.price
         departureLocation.attributedText = content.start
         destinationLocation.attributedText = content.destination
     }

@@ -19,4 +19,8 @@ extension ModuleFactoryImp: SearchModuleFactory {
     func makeSearchResultsController(viewModel: SearchResultsViewModelType) -> SearchResultsView {
         return SearchResultsController(viewModel: viewModel)
     }
+    
+    func makeLocationSearchController(viewModel: LocationSearchViewModelType) -> LocationSearchView {
+        return LocationSearchController(viewModel: viewModel)
+    }
 }

@@ -24,7 +24,9 @@ class SearchCoordinator: BaseCoordinator {
     func showSearchPage() {
         let formViewModel = SearchFormViewModel()
         let module = factory.makeSearchController(viewModel: formViewModel)
-        module.onShowResults = showResults(trips:)
+        module.onShowResults = { [weak self] data, request in
+            self?.showResults(viewModel: SearchResultsViewModel(data: data, request: request))
+        }
         
         module.onSelectStartWith = { [weak self] start in
             self?.showLocationSearch(text: start ?? "", completion: { (address, fullAddress, coordinates) in
@@ -42,18 +44,19 @@ class SearchCoordinator: BaseCoordinator {
     }
     
     func showLocationSearch(text: String, completion: @escaping ((_ address: String, _ fullAddress: String, _ coordinates: CLLocationCoordinate2D?) -> Void)) {
-        let locationSearch: LocationSearchView = LocationSearchController(viewModel: LocationSearchViewModel(place: text))
-        locationSearch.didFinishWith =  { placeString, fullAddress, coordinates in
+        let module = factory.makeLocationSearchController(viewModel: LocationSearchViewModel(place: text))
+        module.didFinishWith =  { placeString, fullAddress, coordinates in
             completion(placeString, fullAddress, coordinates)
             self.router.dismissModule()
         }
         
-        self.router.present(locationSearch)
+        self.router.present(module)
     }
 
     
-    func showResults(trips: [BlaBlaApiModel.TripSearchResults.Trip]) {
-        let module = factory.makeSearchResultsController(viewModel: SearchResultsViewModel(trips: trips))
+    func showResults(viewModel: SearchResultsViewModelType) {
+        let module = factory.makeSearchResultsController(viewModel: viewModel)
         self.router.push(module)
     }
+
 }
