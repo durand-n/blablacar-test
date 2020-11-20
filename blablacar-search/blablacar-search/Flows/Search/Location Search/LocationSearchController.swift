@@ -9,13 +9,13 @@ import UIKit
 import MapKit
 
 protocol LocationSearchView: BaseView {
-    var didFinishWith: ((_ address: String, _ location: CLLocationCoordinate2D?) -> Void)? { get set }
+    var didFinishWith: ((_ address: String, _ fullAddress: String, _ location: CLLocationCoordinate2D?) -> Void)? { get set }
     var didCancel: (() -> Void)? { get set }
 }
 
 class LocationSearchController: UIViewController, LocationSearchView {
     // MARK: - Protocol compliance
-    var didFinishWith: ((_ address: String, _ location: CLLocationCoordinate2D?) -> Void)?
+    var didFinishWith: ((_ address: String, _ fullAddress: String, _ location: CLLocationCoordinate2D?) -> Void)?
     var didCancel: (() -> Void)?
     
     // MARK: - private properties
@@ -47,6 +47,7 @@ class LocationSearchController: UIViewController, LocationSearchView {
         tableView.tableHeaderView = searchBar
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerCellClass(LocationSearchCell.self)
         view.addSubviews([tableView])
         
         tableView.snp.makeConstraints { cm in
@@ -56,9 +57,7 @@ class LocationSearchController: UIViewController, LocationSearchView {
     }
 }
 
-extension LocationSearchController: UISearchBarDelegate {
-    
-}
+extension LocationSearchController: UISearchBarDelegate {}
 
 extension LocationSearchController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -72,7 +71,7 @@ extension LocationSearchController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withClass: LocationSearchCell.self)
         let selectedItem = viewModel.itemFor(indexPath.row)
         cell.textLabel?.text = selectedItem.title
         cell.detailTextLabel?.text = selectedItem.subtitle
@@ -80,7 +79,16 @@ extension LocationSearchController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
         viewModel.selectItemAt(indexPath.row)
+    }
+}
+
+class LocationSearchCell: UITableViewCell {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

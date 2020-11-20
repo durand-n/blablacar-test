@@ -7,10 +7,12 @@
 
 import Foundation
 import Alamofire
+import MapKit
 
 enum BlaBlaApiRoutes {
     case token
     case trip(from: String, to: String, uuid: String)
+    case tripWithCoordinates(from: String, to: String, uuid: String)
 }
 
 extension BlaBlaApiRoutes {
@@ -20,6 +22,8 @@ extension BlaBlaApiRoutes {
             return "\(Constants.SERVER_URL)/token"
         case .trip(from: let from, to: let to, uuid: let uuid):
             return "\(Constants.SERVER_URL)/trip/search?from_address=\(from)&to_address=\(to)&search_uuid=\(uuid)"
+        case .tripWithCoordinates(from: let from, to: let to, uuid: let uuid):
+            return "\(Constants.SERVER_URL)/trip/search?from_coordinates=\(from)&to_coordinates=\(to)&search_uuid=\(uuid)"
         }
     }
 }
@@ -27,11 +31,12 @@ extension BlaBlaApiRoutes {
 protocol BlaBlaApi {
     func getToken(completion: @escaping (_ token: String? , _ error: Error?) -> Void)
     func getTrips(from adress: String, to adress: String, completion: @escaping (_ result: [BlaBlaApiModel.TripSearchResults.Trip]? , _ error: Error?) -> Void)
+    func getTrips(from coordinates: CLLocationCoordinate2D, to coordinates: CLLocationCoordinate2D, completion: @escaping (_ result: [BlaBlaApiModel.TripSearchResults.Trip]? , _ error: Error?) -> Void)
 }
 
 
 class BlaBlaApiImp: BlaBlaApi {
-    
+
     func getToken(completion: @escaping (String?, Error?) -> Void) {
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         let parameters: Parameters = ["grant_type": "client_credentials",
@@ -70,7 +75,31 @@ class BlaBlaApiImp: BlaBlaApi {
         AF.request(BlaBlaApiRoutes.trip(from: from, to: to, uuid: UIDevice.current.identifierForVendor!.uuidString).path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseString(encoding: String.Encoding.utf8) { response in
             switch response.result {
             case let .success(value):
-                print(value)
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .iso8601
+                    let results = try decoder.decode(BlaBlaApiModel.TripSearchResults.self, from: value.data(using: .utf8)!)
+                    completion(results.trips, nil)
+                } catch let jsonError {
+                    completion(nil, jsonError)
+                }
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+    
+    func getTrips(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([BlaBlaApiModel.TripSearchResults.Trip]?, Error?) -> Void) {
+        let headers: HTTPHeaders = ["Content-Type": "application/json",
+                                    "X-Locale": "fr_FR",
+                                    "X-Visitor-Id": UIDevice.current.identifierForVendor!.uuidString,
+                                    "Authorization": "Bearer \(keychain.token())",
+                                    "X-Currency": "EUR",
+                                    "X-Client" : "iOS|1.0.0"
+                                    ]
+        AF.request(BlaBlaApiRoutes.tripWithCoordinates(from: "\(from.latitude),\(from.longitude)", to: "\(to.latitude),\(to.longitude)", uuid: UIDevice.current.identifierForVendor!.uuidString).path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseString(encoding: String.Encoding.utf8) { response in
+            switch response.result {
+            case let .success(value):
                 do {
                     let decoder = JSONDecoder()
                     decoder.dateDecodingStrategy = .iso8601

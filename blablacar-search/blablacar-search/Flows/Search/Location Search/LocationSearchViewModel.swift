@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 protocol LocationSearchViewModelType {
-    var didFinishWith: ((_ address: String, _ location: CLLocationCoordinate2D?) -> Void)? { get set }
+    var didFinishWith: ((_ address: String, _ fullAddress: String, _ location: CLLocationCoordinate2D?) -> Void)? { get set }
     var shouldReloadData: (() -> Void)? { get set }
     
     var itemCount: Int { get }
@@ -22,7 +22,7 @@ protocol LocationSearchViewModelType {
 class LocationSearchViewModel: NSObject, LocationSearchViewModelType {
     // MARK: - Protocol compliance
     var shouldReloadData: (() -> Void)?
-    var didFinishWith: ((_ address: String, _ location: CLLocationCoordinate2D?) -> Void)?
+    var didFinishWith: ((_ address: String, _ fullAddress: String, _ location: CLLocationCoordinate2D?) -> Void)?
     
     // MARK: - private properties
     private var matchingItems: [MKLocalSearchCompletion] = []
@@ -51,9 +51,9 @@ class LocationSearchViewModel: NSObject, LocationSearchViewModelType {
         let search = MKLocalSearch(request: searchRequest)
         search.start { (response, error) in
             if let response = response, let coordinates = response.mapItems.first?.placemark.coordinate {
-                self.didFinishWith?(placeItem.title + ", " + placeItem.subtitle, coordinates)
+                self.didFinishWith?(placeItem.title, placeItem.title + ", " + placeItem.subtitle, coordinates)
             } else {
-                self.didFinishWith?(placeItem.title + ", " + placeItem.subtitle, nil)
+                self.didFinishWith?(placeItem.title, placeItem.title + ", " + placeItem.subtitle, nil)
             }
         }
     }

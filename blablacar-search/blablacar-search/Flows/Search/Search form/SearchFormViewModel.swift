@@ -15,8 +15,8 @@ protocol SearchFormViewModelType {
     var onGetAccessToken: (() -> Void)? { get set }
     func refreshToken()
     func getTrips(completion: @escaping (_ trips: [BlaBlaApiModel.TripSearchResults.Trip]?, _ error: String?) -> Void)
-    func setStartWayPoint(text: String, coordinates: CLLocationCoordinate2D?)
-    func setDestinationWayPoint(text: String, coordinates: CLLocationCoordinate2D?)
+    func setStartWayPoint(address: String, fullAddress: String, coordinates: CLLocationCoordinate2D?)
+    func setDestinationWayPoint(address: String, fullAddress: String, coordinates: CLLocationCoordinate2D?)
     
     var startAddress: String { get }
     var destinationAddress: String { get }
@@ -30,8 +30,8 @@ class SearchFormViewModel: SearchFormViewModelType {
     var onFieldsUpdate: (() -> Void)?
     
     // MARK: - private properties
-    private var startWayPoint: (text: String, location: CLLocationCoordinate2D?) = ("Paris", nil)
-    private var destinationWayPoint: (text: String, location: CLLocationCoordinate2D?) = ("Toulouse", nil)
+    private var startWayPoint: (address: String, fullAddress: String, location: CLLocationCoordinate2D?) = ("Paris", "Paris, France", nil)
+    private var destinationWayPoint: (address: String, fullAddress: String, location: CLLocationCoordinate2D?) = ("Toulouse", "Toulouse, France", nil)
     
     // MARK: - Controler's trigerred method
     
@@ -47,31 +47,41 @@ class SearchFormViewModel: SearchFormViewModelType {
     }
     
     func getTrips(completion: @escaping (_ trips: [BlaBlaApiModel.TripSearchResults.Trip]?, _ error: String?) -> Void) {
-        Services.shared.blablaApi.getTrips(from: "Paris", to: "Toulouse") { (trips, error) in
-            if let trips = trips {
-                completion(trips, nil)
-            } else {
-                completion(nil, error?.localizedDescription)
+        if let start = startWayPoint.location, let destination = destinationWayPoint.location {
+            Services.shared.blablaApi.getTrips(from: start, to: destination) { (trips, error) in
+                if let trips = trips {
+                    completion(trips, nil)
+                } else {
+                    completion(nil, error?.localizedDescription)
+                }
+            }
+        } else {
+            Services.shared.blablaApi.getTrips(from: startWayPoint.address, to: destinationWayPoint.address) { (trips, error) in
+                if let trips = trips {
+                    completion(trips, nil)
+                } else {
+                    completion(nil, error?.localizedDescription)
+                }
             }
         }
     }
     
-    func setStartWayPoint(text: String, coordinates: CLLocationCoordinate2D?) {
-        startWayPoint = (text, coordinates)
+    func setStartWayPoint(address: String, fullAddress: String, coordinates: CLLocationCoordinate2D?) {
+        startWayPoint = (address, fullAddress, coordinates)
         onFieldsUpdate?()
     }
     
-    func setDestinationWayPoint(text: String, coordinates: CLLocationCoordinate2D?) {
-        destinationWayPoint = (text, coordinates)
+    func setDestinationWayPoint(address: String, fullAddress: String, coordinates: CLLocationCoordinate2D?) {
+        destinationWayPoint = (address, fullAddress, coordinates)
         onFieldsUpdate?()
     }
     
     var startAddress: String {
-        return startWayPoint.text
+        return startWayPoint.fullAddress
     }
     
     var destinationAddress: String {
-        return destinationWayPoint.text
+        return destinationWayPoint.fullAddress
     }
     
 }

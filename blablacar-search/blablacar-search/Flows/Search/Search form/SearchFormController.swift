@@ -144,7 +144,6 @@ class SearchFormController: UIViewController, SearchFormView {
 
 extension SearchFormController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
         textField.resignFirstResponder()
         textField.tag == 0 ? self.onSelectStartWith?(textField.text) : self.onSelectDesinationWith?(textField.text)
     }
