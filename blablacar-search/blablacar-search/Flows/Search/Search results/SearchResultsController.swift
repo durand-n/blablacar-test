@@ -26,7 +26,6 @@ class SearchResultsController: UIViewController, SearchResultsView {
     init(viewModel: SearchResultsViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
         self.viewModel.onInsert = self.didInsert
         
         self.viewModel.onDone = { [weak self] in
@@ -55,7 +54,7 @@ class SearchResultsController: UIViewController, SearchResultsView {
         tableView.separatorColor = .clear
         tableView.backgroundColor = .sand
         tableView.registerCellClass(TripCell.self)
-        
+        overrideUserInterfaceStyle = .light
         view.addSubviews([tableView, emptyLabel])
         
         tableView.snp.makeConstraints { cm in

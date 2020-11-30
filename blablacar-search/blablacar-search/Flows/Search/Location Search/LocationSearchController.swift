@@ -31,6 +31,7 @@ class LocationSearchController: UIViewController, LocationSearchView {
         self.viewModel = viewModel
         searchBar.text = viewModel.fieldInit
         super.init(nibName: nil, bundle: nil)
+        overrideUserInterfaceStyle = .light
     }
     
     required init?(coder: NSCoder) {

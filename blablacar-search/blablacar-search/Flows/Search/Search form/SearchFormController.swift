@@ -31,6 +31,7 @@ class SearchFormController: UIViewController, SearchFormView {
     init(viewModel: SearchFormViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        overrideUserInterfaceStyle = .light
         self.viewModel.onShowError = showError
         self.viewModel.onGetAccessToken = {
             Loader.hide()
